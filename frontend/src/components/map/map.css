@@ -1,0 +1,132 @@
+@import "leaflet/dist/leaflet.css";
+
+/* ----- Custom map marker styles (Leaflet divIcon) ----- */
+
+.ibvap-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+}
+
+.ibvap-marker__pin {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.35);
+}
+
+.ibvap-marker__pin > * {
+  transform: rotate(45deg);
+}
+
+.ibvap-marker--online .ibvap-marker__pin {
+  background: #16a34a;
+}
+.ibvap-marker--offline .ibvap-marker__pin {
+  background: #94a3b8;
+}
+.ibvap-marker--warning .ibvap-marker__pin {
+  background: #ea580c;
+}
+.ibvap-marker--alert .ibvap-marker__pin {
+  background: #dc2626;
+}
+
+.ibvap-marker--selected .ibvap-marker__pin {
+  outline: 3px solid rgba(15, 42, 79, 0.5);
+}
+
+/* Alert markers: wider pulse pin, severity-coded */
+.ibvap-alert-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ibvap-alert-marker__dot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.4);
+}
+
+.ibvap-alert-marker--critical .ibvap-alert-marker__dot {
+  background: #7f1d1d;
+}
+.ibvap-alert-marker--high .ibvap-alert-marker__dot {
+  background: #dc2626;
+}
+.ibvap-alert-marker--medium .ibvap-alert-marker__dot {
+  background: #f97316;
+}
+.ibvap-alert-marker--low .ibvap-alert-marker__dot {
+  background: #eab308;
+}
+
+.ibvap-alert-marker--selected .ibvap-alert-marker__dot {
+  outline: 3px solid rgba(15, 42, 79, 0.5);
+}
+
+/* Current device location: blue dot + soft accuracy-style pulse. */
+.ibvap-my-location {
+  position: relative;
+}
+.ibvap-my-location__pulse,
+.ibvap-my-location__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+}
+.ibvap-my-location__pulse {
+  width: 28px;
+  height: 28px;
+  background: rgba(37, 99, 235, 0.22);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+}
+.ibvap-my-location__dot {
+  width: 13px;
+  height: 13px;
+  background: #2563eb;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 5px rgba(15, 23, 42, 0.55);
+}
+
+/* Leaflet popup theming to match IBVAP design */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  font-family: Inter, system-ui, sans-serif;
+}
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
+
+.ibvap-map-container.leaflet-container,
+.ibvap-map-container .leaflet-container {
+  font-family: Inter, system-ui, sans-serif;
+  background: #e7ecf3;
+}
+
+.ibvap-map-expanded {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 115px);
+  height: calc(100dvh - 115px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ibvap-map-expanded .ibvap-map-container {
+  min-height: 420px;
+}

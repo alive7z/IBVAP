@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   THEME — light + dark CSS variables
+   slate & white are remapped in tailwind.config.js to resolve to
+   these variables, so a single `.dark` set themes the whole app.
+   ============================================================ */
+:root {
+  color-scheme: light;
+
+  /* page background */
+  --c-bg: 246 248 251;
+
+  /* slate scale (standard Tailwind light values) */
+  --c-slate-50: 248 250 252;
+  --c-slate-100: 241 245 249;
+  --c-slate-200: 226 232 240;
+  --c-slate-300: 203 213 225;
+  --c-slate-400: 148 163 184;
+  --c-slate-500: 100 116 139;
+  --c-slate-600: 71 85 105;
+  --c-slate-700: 51 65 85;
+  --c-slate-800: 30 41 59;
+  --c-slate-900: 15 23 42;
+  --c-slate-950: 2 6 23;
+
+  /* white (card / header / input surfaces) */
+  --c-white: 255 255 255;
+}
+
+@layer base {
+  :root {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: rgb(var(--c-bg));
+    color: rgb(var(--c-slate-800));
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border;
+    background-color: rgb(var(--c-white));
+    border-color: rgb(var(--c-slate-200));
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border px-3 py-2 text-sm outline-none transition;
+    background-color: rgb(var(--c-white));
+    border-color: rgb(var(--c-slate-300));
+    color: rgb(var(--c-slate-800));
+  }
+  .input-field::placeholder {
+    color: rgb(var(--c-slate-400));
+  }
+  .input-field:focus {
+    border-color: rgb(var(--c-slate-500));
+    box-shadow: 0 0 0 3px rgb(var(--c-slate-500) / 0.2);
+  }
+
+  .btn-focus {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2;
+  }
+
+  /* Micro-interaction helpers */
+  .card-hover {
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(16, 24, 40, 0.10);
+  }
+
+  .icon-btn {
+    @apply rounded-lg p-2 transition-colors;
+    color: rgb(var(--c-slate-600));
+  }
+  .icon-btn:hover {
+    background-color: rgb(var(--c-slate-100));
+  }
+
+  /* Page enter transition */
+  .page-enter {
+    animation: pageFadeIn 0.2s ease-out;
+  }
+}
+
+@layer utilities {
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--c-slate-100)) 25%,
+      rgb(var(--c-slate-200)) 37%,
+      rgb(var(--c-slate-100)) 63%
+    );
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drawerIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scaleY(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+/* ============================================================
+   Custom scrollbar (subtle)
+   ============================================================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-slate-300)) transparent;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--c-slate-300));
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--c-slate-400));
+}
+
+/* Map container surface */
+.ibvap-map-container.leaflet-container,
+.ibvap-map-container .leaflet-container {
+  background: #e8edf3;
+}
+
+/* ============================================================
+   Reduced motion — tone everything back down
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
