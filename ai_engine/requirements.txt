@@ -1,0 +1,24 @@
+# Phase 8 — AI detection + tracking dependencies.
+
+opencv-python>=4.10.0
+numpy>=1.26.0
+
+# Internal FastAPI AI service
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+python-dotenv>=1.0.0
+
+# Node.js communication
+httpx>=0.27.0
+
+# YOLO detection + tracking
+ultralytics>=8.3.0
+torch>=2.1.0
+
+# Phase 12 — ANPR plate OCR (lazy-loaded in anpr/ocr.py)
+easyocr>=1.7.0
+
+# Tests
+pytest>=8.2.0
